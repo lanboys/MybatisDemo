@@ -14,13 +14,32 @@
 
     -->
 
-
     <insert id="save" keyColumn="id" keyProperty="id" useGeneratedKeys="true"
-            parameterType="com.bing.lan.mybatis.domain.Employee">
+            parameterType="Employee">
         INSERT INTO employee (name, phone) VALUES (#{name}, #{phone})
     </insert>
 
+    <update id="update" parameterType="Employee">
+        UPDATE employee
+        SET name = #{name}, phone = #{phone}
+        WHERE id = #{id}
+    </update>
 
+    <delete id="delete" parameterType="Employee">
+        DELETE FROM employee
+        WHERE id = #{id}
+    </delete>
+
+    <select id="get" parameterType="long" resultType="Employee">
+        SELECT *
+        FROM employee
+        WHERE id = #{id}
+    </select>
+
+    <select id="list" resultType="Employee">
+        SELECT *
+        FROM employee
+    </select>
 
 
 </mapper>

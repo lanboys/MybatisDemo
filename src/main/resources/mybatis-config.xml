@@ -4,6 +4,9 @@
     "http://mybatis.org/dtd/mybatis-3-config.dtd">
 
 <configuration>
+    <typeAliases>
+        <typeAlias type="com.bing.lan.mybatis.domain.Employee" alias="Employee"/>
+    </typeAliases>
 
     <!-- 环境 dev 线上 等 -->
     <environments default="default">
@@ -20,6 +23,7 @@
             </dataSource>
         </environment>
     </environments>
+
 
     <mappers>
         <mapper resource="com/bing/lan/mybatis/domain/EmployeeMapper.xml"/>
