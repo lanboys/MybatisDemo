@@ -13,7 +13,7 @@ public class EmployeeTest {
     public void testSave() {
         Employee employee = new Employee();
         employee.setName("xiaohong");
-        employee.setPhone("123456789");
+        employee.setTelephone("123456789");
         SqlSession sqlSession = null;
         try {
             sqlSession = MybatisUtil.openSession();
@@ -40,7 +40,7 @@ public class EmployeeTest {
         Employee employee = new Employee();
         employee.setId(2L);
         employee.setName("xiaoho2ng");
-        employee.setPhone("2222123456789");
+        employee.setTelephone("2222123456789");
         SqlSession sqlSession = null;
         try {
             sqlSession = MybatisUtil.openSession();
@@ -65,11 +65,14 @@ public class EmployeeTest {
     @Test
     public void testGet() {
         SqlSession sqlSession = MybatisUtil.openSession();
-        //Employee employee = sqlSession.selectOne(
-        //        "com.bing.lan.mybatis.domain.EmployeeMapper.get", 2l);
+        Employee employee = sqlSession.selectOne(
+                "com.bing.lan.mybatis.domain.EmployeeMapper.get", 3l);
 
-        EmployeeMapper mapper = sqlSession.getMapper(EmployeeMapper.class);
-        mapper.get(2l);
+        //EmployeeMapper mapper = sqlSession.getMapper(EmployeeMapper.class);
+        //mapper.get(2l);
+
+        System.out.println("testGet(): "+employee);
+
     }
 
     @Test

@@ -8,7 +8,15 @@ public class Employee {
 
     private String name;
     private Long id;
-    private String phone;
+    private String telephone;
+
+    public String getTelephone() {
+        return telephone;
+    }
+
+    public void setTelephone(String telephone) {
+        this.telephone = telephone;
+    }
 
     public String getName() {
         return name;
@@ -26,20 +34,12 @@ public class Employee {
         this.id = id;
     }
 
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
     @Override
     public String toString() {
         return "Employee{" +
                 "name='" + name + '\'' +
                 ", id=" + id +
-                ", phone='" + phone + '\'' +
+                ", phone='" + telephone + '\'' +
                 '}';
     }
 }

@@ -6,22 +6,30 @@
 
 <mapper namespace="com.bing.lan.mybatis.domain.EmployeeMapper">
 
+    <resultMap id="employee_mapping" type="Employee">
+        <!-- id result 标签区别不大 -->
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="phone" property="telephone"/>
+    </resultMap>
     <!--
 
     keyColumn: 数据库字段名
-    keyProperty: 对象的字段名
+    keyProperty: 对象的属性名
     useGeneratedKeys: 是否将自动增长的key值 存到对象的字段中
 
     -->
 
+    <!--parameterType="Employee"-->
     <insert id="save" keyColumn="id" keyProperty="id" useGeneratedKeys="true"
-            parameterType="Employee">
-        INSERT INTO employee (name, phone) VALUES (#{name}, #{phone})
+            parameterMap="employee_mappinging"
+    >
+        INSERT INTO employee (name, phone) VALUES (#{name}, #{telephone})
     </insert>
 
     <update id="update" parameterType="Employee">
         UPDATE employee
-        SET name = #{name}, phone = #{phone}
+        SET name = #{name}, phone = #{telephone}
         WHERE id = #{id}
     </update>
 
@@ -30,13 +38,20 @@
         WHERE id = #{id}
     </delete>
 
-    <select id="get" parameterType="long" resultType="Employee">
+    <!-- resultType resultMap 只能有个 -->
+
+    <!--
+        resultType = "Employee"
+        默认 属性名称 数据库字段名一一匹配
+    -->
+    <select id="get" parameterType="long"
+            resultMap="employee_mapping">
         SELECT *
         FROM employee
         WHERE id = #{id}
     </select>
 
-    <select id="list" resultType="Employee">
+    <select id="list" resultMap="employee_mapping">
         SELECT *
         FROM employee
     </select>
