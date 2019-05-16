@@ -13,6 +13,11 @@
         <typeAlias type="com.bing.lan.mybatis.domain.Employee" alias="Employee"/>
     </typeAliases>
 
+    <!--<plugins>-->
+        <!--<plugin interceptor="com.bing.lan.mybatis.domain.MySqlPagingPlugin">-->
+        <!--</plugin>-->
+    <!--</plugins>-->
+
     <!-- 环境 dev 线上 等 -->
     <environments default="default">
         <!-- 一个environment 代表一个数据库环境 -->
@@ -32,9 +37,6 @@
 
     <mappers>
         <mapper resource="com/bing/lan/mybatis/domain/EmployeeMapper.xml"/>
-
-
     </mappers>
-
 
 </configuration>

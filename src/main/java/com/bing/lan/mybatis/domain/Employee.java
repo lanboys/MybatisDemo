@@ -1,10 +1,12 @@
 package com.bing.lan.mybatis.domain;
 
+import java.io.Serializable;
+
 /**
  * Created by 蓝兵 on 2018/4/20.
  */
 
-public class Employee {
+public class Employee implements Serializable{
 
     private String name;
     private Long id;

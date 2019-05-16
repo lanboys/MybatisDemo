@@ -3,8 +3,10 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-
 <mapper namespace="com.bing.lan.mybatis.domain.EmployeeMapper">
+
+    <!-- 开启本mapper的二级缓存 -->
+    <cache/>
 
     <resultMap id="employee_mapping" type="Employee">
         <!-- id result 标签区别不大 -->
@@ -12,19 +14,24 @@
         <result column="name" property="name"/>
         <result column="phone" property="telephone"/>
     </resultMap>
+
+    <parameterMap id="employee_mappinging" type="Employee">
+        <!-- 存的时候parameterMap不需要像resultMap 简历 column 与 property 的对应关系，sql 中对应过了-->
+        <parameter property="name"/>
+        <parameter property="telephone"/>
+    </parameterMap>
+
     <!--
-
-    keyColumn: 数据库字段名
-    keyProperty: 对象的属性名
-    useGeneratedKeys: 是否将自动增长的key值 存到对象的字段中
-
-    -->
+         keyColumn: 数据库字段名
+         keyProperty: 对象的属性名
+         useGeneratedKeys: 是否将自动增长的key值 存到对象的字段中
+   -->
 
     <!--parameterType="Employee"-->
+    <!--INSERT INTO employee (name, phone) VALUES (#{name}, #{telephone})-->
     <insert id="save" keyColumn="id" keyProperty="id" useGeneratedKeys="true"
-            parameterMap="employee_mappinging"
-    >
-        INSERT INTO employee (name, phone) VALUES (#{name}, #{telephone})
+            parameterMap="employee_mappinging">
+        INSERT INTO employee (name) VALUES (#{name})
     </insert>
 
     <update id="update" parameterType="Employee">
@@ -44,11 +51,15 @@
         resultType = "Employee"
         默认 属性名称 数据库字段名一一匹配
     -->
-    <select id="get" parameterType="long"
-            resultMap="employee_mapping">
+    <select id="get" parameterType="long" resultMap="employee_mapping">
         SELECT *
         FROM employee
         WHERE id = #{id}
+    </select>
+
+    <select id="listAll" resultMap="employee_mapping">
+        SELECT *
+        FROM employee
     </select>
 
     <select id="list" resultMap="employee_mapping">

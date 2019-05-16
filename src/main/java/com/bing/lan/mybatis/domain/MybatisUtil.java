@@ -13,7 +13,7 @@ import java.io.IOException;
 
 public class MybatisUtil {
 
-    private static MybatisUtil instance;
+    private static volatile MybatisUtil instance;
     private static SqlSessionFactory sessionFactory;
 
     private MybatisUtil() {
